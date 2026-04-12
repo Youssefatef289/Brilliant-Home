@@ -1,0 +1,21 @@
+/* صفحة الرئيسية */
+.page-home {
+  font-family: 'Cairo', sans-serif;
+}
+
+.page-home,
+.page-home :where(h1, h2, h3, h4, h5, h6, p, span, a, li, label, figcaption, small) {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* قسم من نحن — الرئيسية */
+.section-home-about {
+  scroll-margin-top: 5rem;
+}
+
+/* قسم تصنيع بالعمولة */
+.section-commission ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

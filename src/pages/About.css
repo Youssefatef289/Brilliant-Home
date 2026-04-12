@@ -1,0 +1,9 @@
+/* صفحة من نحن */
+.page-about {
+  font-family: 'Cairo', sans-serif;
+}
+
+.page-about,
+.page-about :where(h1, h2, h3, h4, h5, h6, p, span, a, li, label, strong, cite, blockquote) {
+  font-family: 'Cairo', sans-serif;
+}

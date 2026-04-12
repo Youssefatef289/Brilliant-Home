@@ -1,0 +1,9 @@
+/* صفحة 404 */
+.page-not-found {
+  font-family: 'Cairo', sans-serif;
+}
+
+.page-not-found,
+.page-not-found :where(h1, h2, h3, p, span, a) {
+  font-family: 'Cairo', sans-serif;
+}

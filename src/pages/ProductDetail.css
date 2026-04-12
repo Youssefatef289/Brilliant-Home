@@ -1,0 +1,24 @@
+/* صفحة تفاصيل المنتج */
+.page-product-detail {
+  font-family: 'Cairo', sans-serif;
+}
+
+.page-product-detail,
+.page-product-detail :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a,
+    li,
+    label,
+    nav,
+    article,
+    figcaption
+  ) {
+  font-family: 'Cairo', sans-serif;
+}

@@ -1,0 +1,21 @@
+/* هيكل الصفحات المشترك — Navbar + Main + Footer */
+.app-shell {
+  font-family: 'Cairo', sans-serif;
+}
+
+.app-shell :where(nav, header, footer, main, a, button, span, p, li, h1, h2, h3, h4, h5, h6) {
+  font-family: 'Cairo', sans-serif;
+}
+
+/* شعار النافبار — محاذاة منتظمة في RTL */
+.navbar-brand {
+  line-height: 0;
+}
+
+.navbar-brand img {
+  display: block;
+  height: 100px;
+  width: 220px;
+  object-fit: cover;
+  object-position: center;
+}
