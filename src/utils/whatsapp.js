@@ -1,5 +1,6 @@
 import { SITE } from '@/data/site';
 import { formatProductTitle } from '@/utils/productDisplay';
+import { getProductDisplayHeadline } from '@/utils/productMarketing';
 
 /**
  * @param {string} [message]
@@ -17,6 +18,6 @@ export function buildWhatsAppUrl(message) {
  * @returns {string}
  */
 export function orderMessageForProduct(product) {
-  const title = formatProductTitle(product.name);
+  const title = getProductDisplayHeadline(product, formatProductTitle);
   return `مرحبًا Brilliant Home، أرغب في الاستفسار عن الطلب:\nالمنتج: ${title}\nالكود: ${product.id}\nالرابط: ${typeof window !== 'undefined' ? window.location.origin : ''}/products/${product.slug}`;
 }

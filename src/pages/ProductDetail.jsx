@@ -1,4 +1,4 @@
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useParams, Navigate, Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import Seo from '@/components/seo/Seo';
@@ -6,6 +6,7 @@ import ProductGallery from '@/components/products/ProductGallery';
 import RelatedProducts from '@/components/products/RelatedProducts';
 import { getProductBySlug } from '@/utils/products';
 import { formatProductBody, formatProductTitle } from '@/utils/productDisplay';
+import { getProductDisplayHeadline, getProductMarketing } from '@/utils/productMarketing';
 import { buildWhatsAppUrl, orderMessageForProduct } from '@/utils/whatsapp';
 import { Button } from '@/components/ui/Button';
 import { SITE } from '@/data/site';
@@ -21,15 +22,25 @@ function WhatsAppIcon({ className = 'h-5 w-5' }) {
 
 export default function ProductDetail() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const product = slug ? getProductBySlug(slug) : undefined;
 
   if (!product) {
     return <Navigate to="/404" replace />;
   }
 
-  const displayTitle = formatProductTitle(product.name);
-  const displayDesc = formatProductBody(product.description);
-  const displayShort = formatProductBody(product.shortDescription);
+  const marketing = getProductMarketing(product);
+  const displayTitle = getProductDisplayHeadline(product, formatProductTitle);
+  const displayDesc = marketing.hasCustom
+    ? marketing.detailText
+    : formatProductBody(product.description);
+  const displayShort = marketing.hasCustom
+    ? marketing.cardText
+    : formatProductBody(product.shortDescription);
+
+  const imgQuery = searchParams.get('img');
+  const galleryInitialIndex =
+    imgQuery != null && imgQuery !== '' ? parseInt(imgQuery, 10) : 0;
 
   const productJsonLd = {
     '@context': 'https://schema.org',
@@ -111,7 +122,11 @@ export default function ProductDetail() {
                 transition={{ duration: 0.45 }}
                 className="lg:col-span-7"
               >
-                <ProductGallery images={product.images} productName={displayTitle} />
+                <ProductGallery
+                  images={product.images}
+                  productName={displayTitle}
+                  initialIndex={galleryInitialIndex}
+                />
               </motion.div>
 
               <motion.div
@@ -143,6 +158,23 @@ export default function ProductDetail() {
                     <p className="text-base font-medium leading-[1.9] text-luxury-ink-secondary md:text-[1.05rem]">
                       {displayDesc}
                     </p>
+                    <ul
+                      className="mt-5 grid list-none gap-2.5 sm:grid-cols-2"
+                      aria-label="مميزات المنتج"
+                    >
+                      {marketing.highlights.map((line) => (
+                        <li
+                          key={line}
+                          className="flex items-start gap-2 text-sm font-semibold text-luxury-ink-muted"
+                        >
+                          <span
+                            className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-luxury-gold-dark"
+                            aria-hidden
+                          />
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

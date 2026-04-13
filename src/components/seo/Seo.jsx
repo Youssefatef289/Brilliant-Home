@@ -17,6 +17,7 @@ export default function Seo({
   image,
   noindex = false,
 }) {
+  const tabTitle = 'Brilliant Home - برلنت هوم';
   const baseUrl =
     typeof window !== 'undefined' ? window.location.origin : 'https://brillianthome.eg';
   const url = `${baseUrl}${path}`;
@@ -31,7 +32,7 @@ export default function Seo({
 
   return (
     <Helmet>
-      <title>{title}</title>
+      <title>{tabTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={url} />
       {noindex && <meta name="robots" content="noindex,nofollow" />}

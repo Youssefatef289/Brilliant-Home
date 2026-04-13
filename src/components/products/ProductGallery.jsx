@@ -1,9 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LazyImage from '@/components/ui/LazyImage';
 
-export default function ProductGallery({ images, productName }) {
-  const [active, setActive] = useState(0);
+function clampIndex(i, len) {
+  if (!len) return 0;
+  const n = Number(i);
+  if (!Number.isFinite(n)) return 0;
+  return Math.min(Math.max(0, Math.floor(n)), len - 1);
+}
+
+export default function ProductGallery({ images, productName, initialIndex = 0 }) {
+  const [active, setActive] = useState(() => clampIndex(initialIndex, images.length));
+
+  useEffect(() => {
+    setActive(clampIndex(initialIndex, images.length));
+  }, [initialIndex, images]);
+
   const main = images[active] ?? images[0];
   const label = productName || 'المنتج';
 

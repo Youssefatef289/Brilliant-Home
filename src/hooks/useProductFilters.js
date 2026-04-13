@@ -1,5 +1,7 @@
 import { useMemo, useState, useDeferredValue } from 'react';
 import { getAllProducts } from '@/utils/products';
+import { formatProductTitle } from '@/utils/productDisplay';
+import { getProductDisplayHeadline, getProductMarketing } from '@/utils/productMarketing';
 
 const ALL = 'all';
 
@@ -20,7 +22,11 @@ export function useProductFilters(opts = {}) {
       const matchCat = category === ALL || p.category === category;
       if (!matchCat) return false;
       if (!q) return true;
+      const m = getProductMarketing(p);
+      const headline = getProductDisplayHeadline(p, formatProductTitle);
       const hay = [
+        headline,
+        m.hasCustom ? m.cardText : '',
         p.name,
         p.shortDescription,
         p.id,

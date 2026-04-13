@@ -4,6 +4,7 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import LazyImage from '@/components/ui/LazyImage';
 import { getHomeShowcaseProducts } from '@/utils/products';
 import { formatProductBody, formatProductTitle } from '@/utils/productDisplay';
+import { getProductDisplayHeadline, getProductMarketing } from '@/utils/productMarketing';
 import { SITE } from '@/data/site';
 
 const container = {
@@ -64,7 +65,11 @@ export default function HomeProductsShowcase() {
           viewport={{ once: true, margin: '-50px' }}
           className="mt-14 grid list-none grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 xl:grid-cols-3 xl:gap-x-10 xl:gap-y-14"
         >
-          {picks.map((p) => (
+          {picks.map((p) => {
+            const m = getProductMarketing(p);
+            const headline = getProductDisplayHeadline(p, formatProductTitle);
+            const blurb = m.hasCustom ? m.cardText : formatProductBody(p.shortDescription);
+            return (
             <motion.li key={p.slug} variants={item} className="min-w-0">
               <Link
                 to={`/products/${p.slug}`}
@@ -73,16 +78,11 @@ export default function HomeProductsShowcase() {
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-luxury-mist shadow-md ring-1 ring-luxury-border/55 transition duration-300 group-hover:shadow-xl group-hover:ring-luxury-gold/30">
                   <LazyImage
                     src={p.images[0]}
-                    alt={formatProductTitle(p.name)}
+                    alt={headline}
                     className="absolute inset-0 h-full w-full min-h-[200px]"
                     imgClassName="object-cover"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-luxury-ink/10 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-                  {p.photoCount != null && p.photoCount > 1 && (
-                    <span className="absolute end-3 top-3 rounded-md bg-white/95 px-2.5 py-1 text-[10px] font-bold text-luxury-ink shadow-sm backdrop-blur-sm md:end-4 md:top-4 md:text-xs">
-                      {p.photoCount} صور
-                    </span>
-                  )}
                 </div>
 
                 <div className="flex flex-1 flex-col bg-transparent pt-4 md:pt-5">
@@ -90,10 +90,10 @@ export default function HomeProductsShowcase() {
                     {p.collectionLabel}
                   </span>
                   <h3 className="mt-3 font-display text-lg font-extrabold leading-snug text-luxury-ink transition group-hover:text-luxury-gold-dark md:text-xl">
-                    {formatProductTitle(p.name)}
+                    {headline}
                   </h3>
                   <p className="mt-2 flex-1 text-sm font-medium leading-[1.75] text-luxury-ink-muted line-clamp-3">
-                    {formatProductBody(p.shortDescription)}
+                    {blurb}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-luxury-gold-dark">
                     <span className="h-px w-8 bg-luxury-gold transition-all group-hover:w-10" aria-hidden />
@@ -102,7 +102,8 @@ export default function HomeProductsShowcase() {
                 </div>
               </Link>
             </motion.li>
-          ))}
+            );
+          })}
         </motion.ul>
 
         <motion.div

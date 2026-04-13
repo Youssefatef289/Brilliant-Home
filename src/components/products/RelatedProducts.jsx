@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import LazyImage from '@/components/ui/LazyImage';
 import { getRelatedProducts } from '@/utils/products';
 import { formatProductTitle } from '@/utils/productDisplay';
+import { getProductDisplayHeadline, getProductMarketing } from '@/utils/productMarketing';
 
 export default function RelatedProducts({ slug, category }) {
   const related = getRelatedProducts(slug, category, 4);
@@ -19,7 +20,10 @@ export default function RelatedProducts({ slug, category }) {
         </p>
       </div>
       <ul className="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {related.map((p, i) => (
+        {related.map((p, i) => {
+          const m = getProductMarketing(p);
+          const headline = getProductDisplayHeadline(p, formatProductTitle);
+          return (
           <motion.li
             key={p.id}
             initial={{ opacity: 0, y: 14 }}
@@ -35,15 +39,20 @@ export default function RelatedProducts({ slug, category }) {
               <div className="relative aspect-[4/3] overflow-hidden bg-luxury-mist">
                 <LazyImage
                   src={p.images[0]}
-                  alt={formatProductTitle(p.name)}
+                  alt={headline}
                   className="absolute inset-0 h-full w-full"
                   imgClassName="object-cover transition duration-500 group-hover:scale-[1.04]"
                 />
               </div>
               <div className="flex flex-1 flex-col p-4">
                 <h3 className="font-display text-base font-extrabold leading-snug text-luxury-ink transition group-hover:text-luxury-gold-dark">
-                  {formatProductTitle(p.name)}
+                  {headline}
                 </h3>
+                {m.hasCustom && (
+                  <p className="mt-2 line-clamp-2 text-xs font-medium leading-relaxed text-luxury-ink-muted">
+                    {m.cardText}
+                  </p>
+                )}
                 {p.price != null && (
                   <p className="mt-2 text-xs font-bold text-luxury-gold-dark">
                     {p.price.toLocaleString('ar-EG')} {p.currency}
@@ -53,7 +62,8 @@ export default function RelatedProducts({ slug, category }) {
               </div>
             </Link>
           </motion.li>
-        ))}
+          );
+        })}
       </ul>
     </section>
   );

@@ -29,8 +29,13 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="font-display text-2xl font-bold text-luxury-ink">{SITE.nameEn}</p>
-            <p className="mt-1 font-semibold text-luxury-gold-dark">{SITE.nameAr}</p>
+            <img
+              src="./image/logo black.png"
+              alt={`${SITE.nameEn} logo`}
+              className="h-20 w-52 object-cover"
+              loading="lazy"
+              decoding="async"
+            />
             <p className="mt-4 text-sm font-medium leading-relaxed text-luxury-ink-muted">
               {SITE.tagline}
             </p>

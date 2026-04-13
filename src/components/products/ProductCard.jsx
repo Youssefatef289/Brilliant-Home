@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import LazyImage from '@/components/ui/LazyImage';
 import { formatProductBody, formatProductTitle } from '@/utils/productDisplay';
+import { getProductDisplayHeadline, getProductMarketing } from '@/utils/productMarketing';
 import { Button } from '@/components/ui/Button';
 import { buildWhatsAppUrl, orderMessageForProduct } from '@/utils/whatsapp';
 
@@ -13,50 +14,60 @@ function WhatsAppIcon({ className = 'h-4 w-4' }) {
   );
 }
 
-export default function ProductCard({ product, index = 0 }) {
+export default function ProductCard({
+  product,
+  index = 0,
+  coverSrc,
+  imageIndex = 0,
+}) {
+  const marketing = getProductMarketing(product);
+  const headline = getProductDisplayHeadline(product, formatProductTitle);
+  const blurb = marketing.hasCustom
+    ? marketing.cardText
+    : formatProductBody(product.shortDescription);
+  const mainSrc = coverSrc ?? product.images[0];
+  const detailTo =
+    imageIndex > 0
+      ? `/products/${product.slug}?img=${imageIndex}`
+      : `/products/${product.slug}`;
+  const imageLabel =
+    imageIndex > 0 ? `${headline} — صورة ${imageIndex + 1}` : headline;
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04 }}
-      className="group flex flex-col overflow-hidden rounded-sm border border-luxury-border bg-white shadow-luxury transition hover:border-luxury-gold/35"
+      className="group flex flex-col overflow-hidden rounded-xl border border-luxury-border/60 bg-transparent transition hover:border-luxury-gold/40"
     >
       <Link
-        to={`/products/${product.slug}`}
-        className="relative block aspect-[4/3] overflow-hidden bg-luxury-mist"
+        to={detailTo}
+        className="relative block aspect-[4/3] overflow-hidden rounded-xl bg-luxury-mist"
       >
         <LazyImage
-          src={product.images[0]}
-          alt={formatProductTitle(product.name)}
+          src={mainSrc}
+          alt={imageLabel}
           className="absolute inset-0 h-full w-full min-h-[200px]"
           imgClassName="object-cover transition duration-700 group-hover:scale-[1.04]"
         />
       </Link>
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        <Link to={`/products/${product.slug}`}>
+
+      <div className="flex flex-1 flex-col px-1 pt-4 md:pt-5">
+        <Link to={detailTo}>
           <h2 className="font-display text-lg font-bold text-luxury-ink transition group-hover:text-luxury-gold-dark md:text-xl">
-            {formatProductTitle(product.name)}
+            {headline}
           </h2>
         </Link>
         <p className="mt-2 line-clamp-3 flex-1 text-sm font-medium leading-[1.75] text-luxury-ink-muted">
-          {formatProductBody(product.shortDescription)}
+          {blurb}
         </p>
-        {product.images?.length > 1 && (
-          <p className="mt-2 text-xs font-bold text-luxury-gold-dark">
-            {product.images.length} صور — المعاينة الكاملة من «عرض التفاصيل»
-          </p>
-        )}
-        {product.price != null && (
-          <p className="mt-3 text-sm font-bold text-luxury-gold-dark">
-            {product.price.toLocaleString('ar-EG')} {product.currency}
-          </p>
-        )}
+
         <div className="mt-5 flex flex-col gap-2 sm:flex-row">
           <Link
-            to={`/products/${product.slug}`}
+            to={detailTo}
             className="inline-flex flex-1 items-center justify-center rounded-sm border border-luxury-gold/50 px-4 py-2.5 text-center text-xs font-bold text-luxury-gold-dark transition hover:bg-luxury-gold/10"
           >
-            عرض التفاصيل
+            التفاصيل
           </Link>
           <Button
             as="a"
@@ -67,7 +78,7 @@ export default function ProductCard({ product, index = 0 }) {
             className="flex-1 !py-2.5 !text-xs"
           >
             <WhatsAppIcon />
-            طلب واتساب
+            اطلب الآن
           </Button>
         </div>
       </div>
