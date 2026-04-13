@@ -26,11 +26,18 @@ export const NAV_LINKS = [
   { label: 'المنتجات', href: '/products' },
 ];
 
+/** يطابق مجلدات `public/image` — يُحدَّث مع `npm run generate:products` عند إضافة صور */
 export const PRODUCT_CATEGORIES = [
   { id: 'all', label: 'الكل' },
-  { id: 'living', label: 'معيشة' },
-  { id: 'bedroom', label: 'غرف نوم' },
-  { id: 'dining', label: 'سفرة' },
-  { id: 'decor', label: 'ديكور' },
-  { id: 'office', label: 'مكتب' },
+  { id: 'bed', label: 'أسِرّة' },
+  { id: 'bedrooms', label: 'غرف نوم' },
+  { id: 'chairs', label: 'كراسي' },
+  { id: 'dining-table', label: 'طاولات سفرة' },
+  { id: 'dressing-room', label: 'غرف لبس' },
+  { id: 'kitchen', label: 'مطابخ' },
+  { id: 'libraries', label: 'مكتبات' },
+  { id: 'living-room', label: 'معيشة' },
+  { id: 'table', label: 'طاولات' },
+  { id: 'tv-libraries', label: 'مكتبات تلفزيون' },
+  { id: 'youth-rooms', label: 'غرف شباب' },
 ];

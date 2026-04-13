@@ -13,6 +13,11 @@
   scroll-margin-top: 5rem;
 }
 
+/* قسم المنتجات — الرئيسية */
+.section-home-products {
+  scroll-margin-top: 5rem;
+}
+
 /* قسم تصنيع بالعمولة */
 .section-commission ol {
   list-style: none;

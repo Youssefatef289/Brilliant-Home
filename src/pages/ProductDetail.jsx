@@ -5,6 +5,7 @@ import Seo from '@/components/seo/Seo';
 import ProductGallery from '@/components/products/ProductGallery';
 import RelatedProducts from '@/components/products/RelatedProducts';
 import { getProductBySlug } from '@/utils/products';
+import { formatProductBody, formatProductTitle } from '@/utils/productDisplay';
 import { buildWhatsAppUrl, orderMessageForProduct } from '@/utils/whatsapp';
 import { Button } from '@/components/ui/Button';
 import { SITE } from '@/data/site';
@@ -26,11 +27,15 @@ export default function ProductDetail() {
     return <Navigate to="/404" replace />;
   }
 
+  const displayTitle = formatProductTitle(product.name);
+  const displayDesc = formatProductBody(product.description);
+  const displayShort = formatProductBody(product.shortDescription);
+
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: product.name,
-    description: product.description,
+    name: displayTitle,
+    description: displayDesc,
     image: product.images,
     sku: product.id,
     offers: product.price
@@ -47,8 +52,8 @@ export default function ProductDetail() {
   return (
     <>
       <Seo
-        title={`${product.name} — ${SITE.nameEn}`}
-        description={product.shortDescription}
+        title={`${displayTitle} — ${SITE.nameEn}`}
+        description={displayShort}
         path={`/products/${product.slug}`}
         image={product.images[0]}
       />
@@ -56,88 +61,127 @@ export default function ProductDetail() {
         <script type="application/ld+json">{JSON.stringify(productJsonLd)}</script>
       </Helmet>
 
-      <div className="page-product-detail">
-      <div className="border-b border-luxury-border bg-luxury-surface py-6">
-        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
-          <nav className="text-xs font-semibold text-luxury-ink-muted">
-            <Link to="/" className="transition hover:text-luxury-gold-dark">
-              الرئيسية
-            </Link>
-            <span className="mx-2 opacity-50">/</span>
-            <Link to="/products" className="transition hover:text-luxury-gold-dark">
-              المنتجات
-            </Link>
-            <span className="mx-2 opacity-50">/</span>
-            <span className="text-luxury-ink">{product.name}</span>
-          </nav>
-        </div>
-      </div>
-
-      <article className="bg-luxury-page py-12 md:py-16">
-        <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.45 }}
+      <div className="page-product-detail min-h-screen bg-luxury-page">
+        <div className="border-b border-luxury-border/80 bg-luxury-surface/90 py-6 backdrop-blur-sm">
+          <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
+            <nav
+              className="flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-luxury-border/50 bg-white/70 px-4 py-3 text-xs font-semibold text-luxury-ink-muted shadow-sm"
+              aria-label="مسار التنقل"
             >
-              <ProductGallery images={product.images} productName={product.name} />
-            </motion.div>
+              <Link to="/" className="transition hover:text-luxury-gold-dark">
+                الرئيسية
+              </Link>
+              <span className="opacity-40" aria-hidden>
+                /
+              </span>
+              <Link to="/products" className="transition hover:text-luxury-gold-dark">
+                المنتجات
+              </Link>
+              <span className="opacity-40" aria-hidden>
+                /
+              </span>
+              <span className="line-clamp-1 text-luxury-ink">{displayTitle}</span>
+            </nav>
 
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.45, delay: 0.05 }}
-              className="lg:sticky lg:top-28"
-            >
-              <p className="text-xs font-bold uppercase tracking-wider text-luxury-gold-dark">
-                كود: {product.id}
-              </p>
-              <h1 className="mt-2 font-display text-3xl font-extrabold text-luxury-ink md:text-4xl">
-                {product.name}
-              </h1>
-              {product.price != null && (
-                <p className="mt-4 text-2xl font-bold text-luxury-gold-dark md:text-3xl">
-                  {product.price.toLocaleString('ar-EG')} {product.currency}
-                  <span className="mr-2 text-sm font-semibold text-luxury-ink-muted">
-                    (إرشادي)
-                  </span>
-                </p>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              {product.collectionLabel && (
+                <span className="rounded-full border border-luxury-gold/35 bg-luxury-gold/10 px-3 py-1 text-[11px] font-bold text-luxury-gold-dark">
+                  {product.collectionLabel}
+                  {product.subfolderLabel ? ` · ${product.subfolderLabel}` : ''}
+                </span>
               )}
-              <p className="mt-6 text-base font-medium leading-[1.85] text-luxury-ink-secondary md:text-lg">
-                {product.description}
-              </p>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <Button
-                  as="a"
-                  href={buildWhatsAppUrl(orderMessageForProduct(product))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="whatsapp"
-                  className="flex-1 sm:flex-none sm:min-w-[220px]"
-                >
-                  <WhatsAppIcon />
-                  اطلب عبر واتساب
-                </Button>
-                <Button
-                  as="a"
-                  href={buildWhatsAppUrl(
-                    `استفسار عن المنتج: ${product.name} (${product.id})`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="outline"
-                  className="flex-1 sm:flex-none"
-                >
-                  استفسار سريع
-                </Button>
-              </div>
-            </motion.div>
+              <span className="rounded-full bg-luxury-charcoal/90 px-3 py-1 text-[11px] font-bold text-white">
+                كود: {product.id}
+              </span>
+              {product.photoCount != null && (
+                <span className="text-xs font-semibold text-luxury-ink-muted">
+                  {product.photoCount} صورة في المعرض
+                </span>
+              )}
+            </div>
           </div>
-
-          <RelatedProducts slug={product.slug} category={product.category} />
         </div>
-      </article>
+
+        <article className="py-10 md:py-14 lg:py-16">
+          <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
+            <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45 }}
+                className="lg:col-span-7"
+              >
+                <ProductGallery images={product.images} productName={displayTitle} />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.06 }}
+                className="lg:col-span-5 lg:sticky lg:top-28"
+              >
+                <div className="rounded-2xl border border-luxury-border/60 bg-white/90 p-6 shadow-luxury ring-1 ring-black/[0.03] md:p-8">
+                  <h1 className="font-display text-2xl font-extrabold leading-snug text-luxury-charcoal md:text-3xl lg:text-[1.85rem]">
+                    {displayTitle}
+                  </h1>
+
+                  {product.images?.length > 1 && (
+                    <p className="mt-3 text-sm font-medium leading-relaxed text-luxury-ink-muted">
+                      مرّ على الصور المصغّرة أدناه لتشاهد كل الزوايا. للمقاسات والخامات والسعر النهائي راسلنا
+                      على واتساب.
+                    </p>
+                  )}
+
+                  {product.price != null && (
+                    <p className="mt-5 text-2xl font-bold text-luxury-gold-dark md:text-3xl">
+                      {product.price.toLocaleString('ar-EG')} {product.currency}
+                      <span className="mr-2 text-sm font-semibold text-luxury-ink-muted">(إرشادي)</span>
+                    </p>
+                  )}
+
+                  <div className="mt-6 border-t border-luxury-border/60 pt-6">
+                    <p className="text-base font-medium leading-[1.9] text-luxury-ink-secondary md:text-[1.05rem]">
+                      {displayDesc}
+                    </p>
+                  </div>
+
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    <Button
+                      as="a"
+                      href={buildWhatsAppUrl(orderMessageForProduct(product))}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="whatsapp"
+                      className="flex-1 sm:min-w-[200px] sm:flex-none"
+                    >
+                      <WhatsAppIcon />
+                      اطلب عبر واتساب
+                    </Button>
+                    <Button
+                      as="a"
+                      href={buildWhatsAppUrl(`استفسار عن: ${displayTitle} (${product.id})`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="outline"
+                      className="flex-1 sm:flex-none"
+                    >
+                      استفسار سريع
+                    </Button>
+                  </div>
+
+                  <Link
+                    to="/products"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-luxury-gold-dark transition hover:text-luxury-gold"
+                  >
+                    ← العودة إلى المنتجات
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+
+            <RelatedProducts slug={product.slug} category={product.category} />
+          </div>
+        </article>
       </div>
     </>
   );

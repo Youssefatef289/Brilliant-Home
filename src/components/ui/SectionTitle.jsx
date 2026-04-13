@@ -41,7 +41,7 @@ export default function SectionTitle({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="mt-4 max-w-2xl text-base font-medium leading-[1.8] text-luxury-ink-muted md:text-lg"
+          className={`mt-4 max-w-2xl text-base font-medium leading-[1.8] text-luxury-ink-muted md:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
         >
           {subtitle}
         </motion.p>

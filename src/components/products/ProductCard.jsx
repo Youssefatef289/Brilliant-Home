@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import LazyImage from '@/components/ui/LazyImage';
+import { formatProductBody, formatProductTitle } from '@/utils/productDisplay';
 import { Button } from '@/components/ui/Button';
 import { buildWhatsAppUrl, orderMessageForProduct } from '@/utils/whatsapp';
 
@@ -22,23 +23,29 @@ export default function ProductCard({ product, index = 0 }) {
     >
       <Link
         to={`/products/${product.slug}`}
-        className="relative block aspect-[4/3] overflow-hidden"
+        className="relative block aspect-[4/3] overflow-hidden bg-luxury-mist"
       >
         <LazyImage
           src={product.images[0]}
-          alt={product.name}
-          className="h-full transition duration-700 group-hover:scale-[1.04]"
+          alt={formatProductTitle(product.name)}
+          className="absolute inset-0 h-full w-full min-h-[200px]"
+          imgClassName="object-cover transition duration-700 group-hover:scale-[1.04]"
         />
       </Link>
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <Link to={`/products/${product.slug}`}>
           <h2 className="font-display text-lg font-bold text-luxury-ink transition group-hover:text-luxury-gold-dark md:text-xl">
-            {product.name}
+            {formatProductTitle(product.name)}
           </h2>
         </Link>
-        <p className="mt-2 line-clamp-2 flex-1 text-sm font-medium leading-[1.75] text-luxury-ink-muted">
-          {product.shortDescription}
+        <p className="mt-2 line-clamp-3 flex-1 text-sm font-medium leading-[1.75] text-luxury-ink-muted">
+          {formatProductBody(product.shortDescription)}
         </p>
+        {product.images?.length > 1 && (
+          <p className="mt-2 text-xs font-bold text-luxury-gold-dark">
+            {product.images.length} صور — المعاينة الكاملة من «عرض التفاصيل»
+          </p>
+        )}
         {product.price != null && (
           <p className="mt-3 text-sm font-bold text-luxury-gold-dark">
             {product.price.toLocaleString('ar-EG')} {product.currency}

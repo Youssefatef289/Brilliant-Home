@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { SITE } from '@/data/site';
 import { buildWhatsAppUrl } from '@/utils/whatsapp';
 import { Button } from '@/components/ui/Button';
+import HeroTextSlider from '@/components/home/HeroTextSlider';
 
 const heroImage =
   'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85';
@@ -49,14 +50,13 @@ export default function Hero() {
             {SITE.nameAr}
           </span>
         </motion.h1>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-6 max-w-xl text-lg font-medium leading-[1.8] text-white/95 md:text-xl"
         >
-          {SITE.tagline}
-        </motion.p>
+          <HeroTextSlider />
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

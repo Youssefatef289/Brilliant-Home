@@ -1,115 +1,239 @@
 import { motion } from 'framer-motion';
-import SectionTitle from '@/components/ui/SectionTitle';
-import { Button } from '@/components/ui/Button';
+import LazyImage from '@/components/ui/LazyImage';
 import { SITE } from '@/data/site';
 import { buildWhatsAppUrl } from '@/utils/whatsapp';
 
-const steps = [
+const SUBTITLE = 'مصنعنا الخاص جاهز لتحويل أفكارك إلى واقع ملموس';
+
+const INTRO_HEADING = 'لماذا تختارنا للتصنيع بالعمولة؟';
+
+const INTRO_BODY = `في ${SITE.nameAr} نجمع بين الخبرة والورشة والتصميم لتقديم تصنيع بالعمولة يلبي مقاساتك وذوقك. نتابع معك من الفكرة حتى التسليم بجودة ثابتة ومواعيد واضحة.`;
+
+const FEATURES = [
   {
-    title: 'استشارة وقياس',
-    body: 'نستمع لفكرتك أو مخطط مساحتك، ونقترح خامات وتشطيبات تناسب ميزانيتك.',
+    id: 'custom',
+    title: 'تصنيع بالعمولة',
+    body: 'نفّذ أفكارك على مقاساتك: مطابخ، غرف، وحدات، وتشطيبات حسب المخطط والخامة التي تختارها.',
+    icon: IconTools,
   },
   {
-    title: 'عرض سعر وموافقة',
-    body: 'تفصيل واضح للتكلفة والمدة الزمنية قبل بدء التصنيع — بدون التزام حتى توافق.',
+    id: 'factory',
+    title: 'مصنعنا الخاص',
+    body: 'إنتاج تحت إشرافنا مباشرة — رقابة على الجودة ومرونة في التعديل أثناء التنفيذ.',
+    icon: IconFactory,
   },
   {
-    title: 'تصنيع ومراجعة جودة',
-    body: 'تنفيذ في الورش المعتمدة مع متابعة جودة التفاصيل قبل التسليم أو التركيب.',
+    id: 'quality',
+    title: 'ضمان الجودة',
+    body: 'اختيار خامات موثوقة وتشطيب دقيق قبل التسليم، لأن قطعتك تبقى معك لسنوات.',
+    icon: IconQuality,
+  },
+  {
+    id: 'team',
+    title: 'فريق محترف',
+    body: 'فنّيون ومصممون يعملون معك خطوة بخطوة لضمان نتيجة قريبة مما تتخيّله.',
+    icon: IconTeam,
   },
 ];
 
-function WhatsAppIcon({ className = 'h-5 w-5' }) {
+/** معرض منظم: صف علوي عريض + مربّعان + صف سفلي بانورامي — بدون فراغات */
+const GALLERY = [
+  {
+    id: 'hero',
+    src: `/image/${['Living Room', ' living room (1).jpeg'].map(encodeURIComponent).join('/')}`,
+    layout: 'col-span-2 aspect-[16/10] sm:aspect-[2.05/1] lg:aspect-[2.15/1]',
+  },
+  {
+    id: 'dining',
+    src: `/image/${['dining table', 'dining table (1).jpeg'].map(encodeURIComponent).join('/')}`,
+    layout: 'aspect-square min-h-[152px] sm:min-h-[168px] lg:min-h-[180px]',
+  },
+  {
+    id: 'table',
+    src: `/image/${['table', 'table (1).jpg'].map(encodeURIComponent).join('/')}`,
+    layout: 'aspect-square min-h-[152px] sm:min-h-[168px] lg:min-h-[180px]',
+  },
+  {
+    id: 'closet',
+    src: `/image/${['Dressing Room', 'Dressing Room (1).jpeg'].map(encodeURIComponent).join('/')}`,
+    layout: 'col-span-2 aspect-[5/3] max-h-[240px] sm:max-h-[280px] lg:max-h-[300px]',
+  },
+];
+
+function IconTools({ className }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655-5.653a2.548 2.548 0 00-3.586-.189l-.83.83a2.25 2.25 0 000 3.182l5.653 4.655z"
+      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l1.5-1.5" />
     </svg>
   );
 }
 
+function IconFactory({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 21h19.5M4.5 3h15M5.25 3v4.5m13.5-4.5v4.5m-16.5 4.5h18v10.5h-18V12zM9 8.25h.008v.008H9V8.25zm0 3h.008v.008H9v-.008zm0 3h.008v.008H9V14.25z"
+      />
+    </svg>
+  );
+}
+
+function IconQuality({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
+  );
+}
+
+function IconTeam({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+      />
+    </svg>
+  );
+}
+
+const cardReveal = {
+  hidden: { opacity: 0, y: 14 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.06 * i, duration: 0.4 },
+  }),
+};
+
 export default function CommissionManufacturing() {
+  const waHref = buildWhatsAppUrl(
+    `مرحبًا ${SITE.nameEn}، أرغب في طلب تصنيع مخصص بالعمولة.`
+  );
+
   return (
     <section
-      className="section-commission relative overflow-hidden border-t border-luxury-border bg-luxury-page py-20 md:py-28"
-      aria-label="تصنيع بالعمولة"
+      className="section-commission border-t border-luxury-border bg-luxury-pearl py-16 md:py-24 lg:py-28"
+      aria-labelledby="commission-section-title"
     >
-      <div className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-luxury-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-24 top-0 h-64 w-64 rounded-full bg-luxury-gold/5 blur-3xl" />
+      <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
+        {/* عنوان مركزي + خط ذهبي تحت أول كلمة */}
+        <header className="mx-auto mb-14 max-w-3xl text-center md:mb-16">
+          <h2
+            id="commission-section-title"
+            className="font-display text-3xl font-extrabold text-luxury-charcoal md:text-4xl lg:text-[2.35rem]"
+          >
+            <span className="relative inline-block pb-2">
+              التصنيع
+              <span
+                className="absolute bottom-0 left-1/2 h-0.5 w-[2.25rem] -translate-x-1/2 rounded-full bg-luxury-gold md:w-12"
+                aria-hidden
+              />
+            </span>{' '}
+            <span className="text-luxury-charcoal">بالعمولة</span>
+          </h2>
+          <p className="mt-5 text-base font-medium leading-[1.85] text-luxury-ink-muted md:text-lg">
+            {SUBTITLE}
+          </p>
+        </header>
 
-      <div className="relative mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <SectionTitle
-              eyebrow="خدمة مخصصة"
-              title="تصنيع بالعمولة"
-              subtitle="نصنع الأثاث والديكور حسب طلبك: مقاساتك، خاماتك، وأسلوبك — من الفكرة حتى التسليم."
-              align="start"
-              className="!mb-10 !text-right [&_.font-display]:text-balance"
-            />
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-xl text-base font-medium leading-[1.85] text-luxury-ink-secondary"
-            >
-              سواء غرفة كاملة أو قطعة واحدة، نعمل معك على تصميم يناسب مساحتك ونحدد معًا
-              الجدول الزمني والتكلفة قبل البدء. مناسب للشقق، الفيلات، والمكاتب.
-            </motion.p>
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+          {/* نص + بطاقات + زر — في RTL يظهر يمينًا */}
+          <div className="order-2 text-start lg:order-1">
+            <h3 className="font-display text-xl font-extrabold text-luxury-charcoal md:text-2xl">
+              {INTRO_HEADING}
+            </h3>
+            <p className="mt-4 max-w-xl text-sm font-medium leading-[1.9] text-luxury-ink-muted md:text-base">
+              {INTRO_BODY}
+            </p>
+
+            <ul className="mt-10 grid list-none grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-5">
+              {FEATURES.map((f, i) => (
+                <motion.li
+                  key={f.id}
+                  custom={i}
+                  variants={cardReveal}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: '-20px' }}
+                  className="rounded-xl border border-luxury-border/60 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition hover:shadow-[0_12px_36px_rgba(0,0,0,0.08)]"
+                >
+                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-luxury-gold/12 text-luxury-gold-dark">
+                    <f.icon className="h-6 w-6" />
+                  </div>
+                  <h4 className="text-center font-display text-base font-extrabold text-luxury-charcoal md:text-lg">
+                    {f.title}
+                  </h4>
+                  <p className="mt-2 text-center text-xs font-medium leading-[1.8] text-luxury-ink-muted md:text-sm">
+                    {f.body}
+                  </p>
+                </motion.li>
+              ))}
+            </ul>
+
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.08 }}
-              className="mt-8 flex flex-wrap gap-3"
+              className="mt-10 flex justify-start lg:justify-end"
             >
-              <Button
-                as="a"
-                href={buildWhatsAppUrl(
-                  `مرحبًا ${SITE.nameEn}، أرغب في الاستفسار عن خدمة التصنيع بالعمولة.`
-                )}
+              <a
+                href={waHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="primary"
+                className="inline-flex min-w-[200px] items-center justify-center rounded-lg bg-[#5c4d3d] px-8 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-[#4a3f32] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-luxury-gold"
               >
-                <WhatsAppIcon />
-                اطلب استشارة تصنيع بالعمولة
-              </Button>
+                اطلب تصنيع مخصص
+              </a>
             </motion.div>
           </div>
 
-          <motion.ol
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+          {/* معرض صور — شبكة متوازنة + إطار ناعم */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
-            className="space-y-5"
+            transition={{ duration: 0.5 }}
+            className="order-1 lg:order-2"
           >
-            {steps.map((step, i) => (
-              <motion.li
-                key={step.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex gap-4 rounded-sm border border-luxury-border bg-white p-5 shadow-luxury md:p-6"
-              >
-                <span
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-luxury-gold/15 text-sm font-bold text-luxury-gold-dark"
-                  aria-hidden
-                >
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="font-display text-lg font-bold text-luxury-ink">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm font-medium leading-[1.8] text-luxury-ink-muted">
-                    {step.body}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
-          </motion.ol>
+            <div className="rounded-2xl bg-gradient-to-br from-white/90 via-luxury-pearl to-luxury-surface p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] ring-1 ring-luxury-border/40 sm:p-3">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5">
+                {GALLERY.map((item, idx) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.05 * idx, duration: 0.45 }}
+                    className={`group relative overflow-hidden rounded-xl bg-luxury-mist shadow-md ring-1 ring-luxury-border/45 transition duration-500 hover:shadow-xl hover:ring-luxury-gold/25 ${item.layout}`}
+                  >
+                    <LazyImage
+                      src={item.src}
+                      alt={`مثال أعمال ${SITE.nameAr} — ${idx + 1}`}
+                      className="h-full w-full min-h-0"
+                      imgClassName="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.045]"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/25"
+                      aria-hidden
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

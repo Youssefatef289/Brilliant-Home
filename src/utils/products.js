@@ -18,6 +18,43 @@ export function getFeaturedProducts() {
 }
 
 /**
+ * منتجات متنوعة للصفحة الرئيسية (تدوير حسب التصنيف ثم تعبئة حتى الحد).
+ * @param {number} [limit]
+ * @returns {Product[]}
+ */
+export function getHomeShowcaseProducts(limit = 6) {
+  const all = [...productsData];
+  const byCat = new Map();
+  for (const p of all) {
+    if (!byCat.has(p.category)) byCat.set(p.category, []);
+    byCat.get(p.category).push(p);
+  }
+  const out = [];
+  const seen = new Set();
+  while (out.length < limit) {
+    let progress = false;
+    for (const [, list] of byCat) {
+      if (out.length >= limit) break;
+      const p = list.shift();
+      if (p && !seen.has(p.slug)) {
+        seen.add(p.slug);
+        out.push(p);
+        progress = true;
+      }
+    }
+    if (!progress) break;
+  }
+  for (const p of all) {
+    if (out.length >= limit) break;
+    if (!seen.has(p.slug)) {
+      seen.add(p.slug);
+      out.push(p);
+    }
+  }
+  return out.slice(0, limit);
+}
+
+/**
  * @param {string} slug
  * @param {string} [category]
  * @param {number} [limit]

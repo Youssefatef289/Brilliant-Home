@@ -2,7 +2,7 @@ import Hero from '@/components/home/Hero';
 import Features from '@/components/home/Features';
 import HomeAboutSection from '@/components/home/HomeAboutSection';
 import CommissionManufacturing from '@/components/home/CommissionManufacturing';
-import LatestProducts from '@/components/home/LatestProducts';
+import HomeProductsShowcase from '@/components/home/HomeProductsShowcase';
 import Testimonials from '@/components/home/Testimonials';
 import Seo from '@/components/seo/Seo';
 import LocalBusinessJsonLd from '@/components/seo/JsonLd';
@@ -23,7 +23,7 @@ export default function Home() {
         <Features />
         <HomeAboutSection />
         <CommissionManufacturing />
-        <LatestProducts />
+        <HomeProductsShowcase />
         <Testimonials />
       </div>
     </>

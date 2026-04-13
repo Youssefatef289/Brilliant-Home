@@ -20,11 +20,20 @@ export function useProductFilters(opts = {}) {
       const matchCat = category === ALL || p.category === category;
       if (!matchCat) return false;
       if (!q) return true;
-      return (
-        p.name.toLowerCase().includes(q) ||
-        p.shortDescription.toLowerCase().includes(q) ||
-        p.id.toLowerCase().includes(q)
-      );
+      const hay = [
+        p.name,
+        p.shortDescription,
+        p.id,
+        p.imagePath,
+        p.collectionLabel,
+        p.subfolderLabel,
+        p.folderPath,
+        p.photoCount != null ? String(p.photoCount) : '',
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return hay.includes(q);
     });
   }, [products, category, deferredQuery]);
 
