@@ -33,8 +33,8 @@
     "id": "gal-0002",
     "slug": "bedrooms-bedroom---2",
     "name": "غرفة نوم — مجموعة جوفور",
-    "shortDescription": "تصميم غرفة نوم بروح جوفور: تنسيق الأثاث، مساحات التخزين، ولمسات ديكور. مرّ على كل الصور لرؤية التفاصيل عن قرب. (4 صور).",
-    "description": "تصميم غرفة نوم بروح جوفور: تنسيق الأثاث، مساحات التخزين، ولمسات ديكور. مرّ على كل الصور لرؤية التفاصيل عن قرب. تتضمن هذه المجموعة 4 صور. للمقاسات والسعر والخامات راسلنا على واتساب.",
+    "shortDescription": "تصميم غرفة نوم بروح جوفور: تنسيق الأثاث، مساحات التخزين، ولمسات ديكور. مرّ على كل الصور لرؤية التفاصيل عن قرب. (4 صورة).",
+    "description": "تصميم غرفة نوم بروح جوفور: تنسيق الأثاث، مساحات التخزين، ولمسات ديكور. مرّ على كل الصور لرؤية التفاصيل عن قرب. تتضمن هذه المجموعة 4 صورة. للمقاسات والسعر والخامات راسلنا على واتساب.",
     "price": null,
     "currency": "EGP",
     "category": "bedrooms",
@@ -55,8 +55,8 @@
     "id": "gal-0003",
     "slug": "bedrooms-bedroom--1",
     "name": "غرفة نوم — مجموعة هورفور",
-    "shortDescription": "أفكار تصميم غرفة نوم بخط هورفور: ألوان، خزائن، وإضاءة متناسقة. الصور تعرض زوايا مختلفة لنفس المشروع لمساعدتك على اختيار التفاصيل. (5 صور).",
-    "description": "أفكار تصميم غرفة نوم بخط هورفور: ألوان، خزائن، وإضاءة متناسقة. الصور تعرض زوايا مختلفة لنفس المشروع لمساعدتك على اختيار التفاصيل. تتضمن هذه المجموعة 5 صور. للمقاسات والسعر والخامات راسلنا على واتساب.",
+    "shortDescription": "أفكار تصميم غرفة نوم بخط هورفور: ألوان، خزائن، وإضاءة متناسقة. الصور تعرض زوايا مختلفة لنفس المشروع لمساعدتك على اختيار التفاصيل. (5 صورة).",
+    "description": "أفكار تصميم غرفة نوم بخط هورفور: ألوان، خزائن، وإضاءة متناسقة. الصور تعرض زوايا مختلفة لنفس المشروع لمساعدتك على اختيار التفاصيل. تتضمن هذه المجموعة 5 صورة. للمقاسات والسعر والخامات راسلنا على واتساب.",
     "price": null,
     "currency": "EGP",
     "category": "bedrooms",
@@ -76,6 +76,35 @@
   },
   {
     "id": "gal-0004",
+    "slug": "bedrooms-bedroom--3",
+    "name": "غرف نوم — bedroom- 3 — معرض صور",
+    "shortDescription": "مجموعة صور من غرف نوم (bedroom- 3): عدة لقطات لنفس التصنيف لتوضيح التفاصيل والخامات. 11 صورة.",
+    "description": "غرف نوم — bedroom- 3 — معرض صور. مجموعة صور من غرف نوم (bedroom- 3): عدة لقطات لنفس التصنيف لتوضيح التفاصيل والخامات. 11 صورة. تصميم وتصنيع حسب الطلب من Brilliant Home — يمكن تعديل المقاسات والألوان بعد المعاينة. للاستفسار وعرض السعر تواصل عبر واتساب.",
+    "price": null,
+    "currency": "EGP",
+    "category": "bedrooms",
+    "featured": false,
+    "images": [
+      "/image/bedrooms/bedroom-%203/bedroom%20(1).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(2).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(3).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(4).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(5).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(6).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(7).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(8).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(9).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(10).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(11).jpeg"
+    ],
+    "folderPath": "bedrooms/bedroom- 3",
+    "imagePath": "bedrooms/bedroom- 3/bedroom (1).jpeg | bedrooms/bedroom- 3/bedroom (2).jpeg | bedrooms/bedroom- 3/bedroom (3).jpeg | bedrooms/bedroom- 3/bedroom (4).jpeg | bedrooms/bedroom- 3/bedroom (5).jpeg | bedrooms/bedroom- 3/bedroom (6).jpeg | bedrooms/bedroom- 3/bedroom (7).jpeg | bedrooms/bedroom- 3/bedroom (8).jpeg | bedrooms/bedroom- 3/bedroom (9).jpeg | bedrooms/bedroom- 3/bedroom (10).jpeg | bedrooms/bedroom- 3/bedroom (11).jpeg",
+    "collectionLabel": "غرف نوم",
+    "subfolderLabel": "bedroom- 3",
+    "photoCount": 11
+  },
+  {
+    "id": "gal-0005",
     "slug": "chairs",
     "name": "كراسي طعام ومكتب وصالون — معرض",
     "shortDescription": "تنويعات في شكل الكرسي، الظهر، والقماش أو الجلد. الصور تساعدك على مطابقة الكرسي مع طاولتك أو غرفتك. (24 صورة).",
@@ -117,7 +146,7 @@
     "photoCount": 24
   },
   {
-    "id": "gal-0005",
+    "id": "gal-0006",
     "slug": "dining-table",
     "name": "طاولات سفرة — أشكال وخامات",
     "shortDescription": "طاولات بأحجام وتشطيبات مختلفة؛ مناسبة لغرف الطعام المفتوحة أو الرسمية. (7 صورة).",
@@ -142,7 +171,7 @@
     "photoCount": 7
   },
   {
-    "id": "gal-0006",
+    "id": "gal-0007",
     "slug": "dressing-room",
     "name": "غرف لبس وخزائن — معرض كامل",
     "shortDescription": "تنسيق تخزين الملابس، مرايا، وإضاءة عملية. الصور تعرض أفكارًا متعددة لغرف اللبس ضمن نفس المعرض. (10 صورة).",
@@ -170,7 +199,7 @@
     "photoCount": 10
   },
   {
-    "id": "gal-0007",
+    "id": "gal-0008",
     "slug": "kitchen-kitchen---1",
     "name": "مطبخ حديث — التصميم الأول",
     "shortDescription": "واجهات، مقاعد علوية وسفلية، وأسطح عمل بأسلوب معاصر. جولة بصرية كاملة عبر عدة لقطات لنفس المشروع. (4 صورة).",
@@ -192,7 +221,7 @@
     "photoCount": 4
   },
   {
-    "id": "gal-0008",
+    "id": "gal-0009",
     "slug": "kitchen-kitchen---2",
     "name": "مطبخ أنيق — التصميم الثاني",
     "shortDescription": "تشطيبات مطبخ بخط مختلف: تباين الألوان، الإضاءة المخفية، وتوزيع الأجهزة. كل الصور خاصة بهذا العرض. (4 صورة).",
@@ -214,7 +243,7 @@
     "photoCount": 4
   },
   {
-    "id": "gal-0009",
+    "id": "gal-0010",
     "slug": "kitchen-kitchen---3",
     "name": "مطبخ عائلي — التصميم الثالث",
     "shortDescription": "مساحة مطبخ عملية مع تخزين واسع وتفاصيل عملية للاستخدام اليومي. تصفح المعرض لرؤية كل الزوايا. (5 صورة).",
@@ -237,7 +266,7 @@
     "photoCount": 5
   },
   {
-    "id": "gal-0010",
+    "id": "gal-0011",
     "slug": "libraries",
     "name": "مكتبات ورفوف كتب — معرض",
     "shortDescription": "وحدات رفوف بارتفاعات مختلفة؛ مناسبة للحائط الكامل أو زوايا المكتب والمعيشة. (6 صورة).",
@@ -261,11 +290,11 @@
     "photoCount": 6
   },
   {
-    "id": "gal-0011",
+    "id": "gal-0012",
     "slug": "living-room",
     "name": "صالون ومعيشة — جولة بصرية",
-    "shortDescription": "كنب، طاولات وسط، ووحدات عرض بأسلوب معيشة عصري. تصفح كل اللقطات لرؤية التوزيع والألوان. (10 صورة).",
-    "description": "كنب، طاولات وسط، ووحدات عرض بأسلوب معيشة عصري. تصفح كل اللقطات لرؤية التوزيع والألوان. تتضمن هذه المجموعة 10 صورة. للمقاسات والسعر والخامات راسلنا على واتساب.",
+    "shortDescription": "كنب، طاولات وسط، ووحدات عرض بأسلوب معيشة عصري. تصفح كل اللقطات لرؤية التوزيع والألوان. (20 صورة).",
+    "description": "كنب، طاولات وسط، ووحدات عرض بأسلوب معيشة عصري. تصفح كل اللقطات لرؤية التوزيع والألوان. تتضمن هذه المجموعة 20 صورة. للمقاسات والسعر والخامات راسلنا على واتساب.",
     "price": null,
     "currency": "EGP",
     "category": "living-room",
@@ -280,16 +309,48 @@
       "/image/Living%20Room/%20living%20room%20(7).jpeg",
       "/image/Living%20Room/%20living%20room%20(8).jpeg",
       "/image/Living%20Room/%20living%20room%20(9).jpeg",
-      "/image/Living%20Room/%20living%20room%20(10).jpeg"
+      "/image/Living%20Room/%20living%20room%20(10).jpeg",
+      "/image/Living%20Room/living%20room%20(1).jpeg",
+      "/image/Living%20Room/living%20room%20(2).jpeg",
+      "/image/Living%20Room/living%20room%20(3).jpeg",
+      "/image/Living%20Room/living%20room%20(4).jpeg",
+      "/image/Living%20Room/living%20room%20(5).jpeg",
+      "/image/Living%20Room/living%20room%20(6).jpeg",
+      "/image/Living%20Room/living%20room%20(7).jpeg",
+      "/image/Living%20Room/living%20room%20(8).jpeg",
+      "/image/Living%20Room/living%20room%20(9).jpeg",
+      "/image/Living%20Room/living%20room%20(10).jpeg"
     ],
     "folderPath": "Living Room",
-    "imagePath": "Living Room/ living room (1).jpeg | Living Room/ living room (2).jpeg | Living Room/ living room (3).jpeg | Living Room/ living room (4).jpeg | Living Room/ living room (5).jpeg | Living Room/ living room (6).jpeg | Living Room/ living room (7).jpeg | Living Room/ living room (8).jpeg | Living Room/ living room (9).jpeg | Living Room/ living room (10).jpeg",
+    "imagePath": "Living Room/ living room (1).jpeg | Living Room/ living room (2).jpeg | Living Room/ living room (3).jpeg | Living Room/ living room (4).jpeg | Living Room/ living room (5).jpeg | Living Room/ living room (6).jpeg | Living Room/ living room (7).jpeg | Living Room/ living room (8).jpeg | Living Room/ living room (9).jpeg | Living Room/ living room (10).jpeg | Living Room/living room (1).jpeg | Living Room/living room (2).jpeg | Living Room/living room (3).jpeg | Living Room/living room (4).jpeg | Living Room/living room (5).jpeg | Living Room/living room (6).jpeg | Living Room/living room (7).jpeg | Living Room/living room (8).jpeg | Living Room/living room (9).jpeg | Living Room/living room (10).jpeg",
     "collectionLabel": "معيشة",
     "subfolderLabel": null,
-    "photoCount": 10
+    "photoCount": 20
   },
   {
-    "id": "gal-0012",
+    "id": "gal-0013",
+    "slug": "slider",
+    "name": "slider — معرض صور",
+    "shortDescription": "مجموعة صور من slider تضم 4 لقطة؛ تصفح التفاصيل لمعاينة الكل.",
+    "description": "slider — معرض صور. مجموعة صور من slider تضم 4 لقطة؛ تصفح التفاصيل لمعاينة الكل. تصميم وتصنيع حسب الطلب من Brilliant Home — يمكن تعديل المقاسات والألوان بعد المعاينة. للاستفسار وعرض السعر تواصل عبر واتساب.",
+    "price": null,
+    "currency": "EGP",
+    "category": "slider",
+    "featured": false,
+    "images": [
+      "/image/slider/slider%20(1).jpg",
+      "/image/slider/slider%20(2).jpg",
+      "/image/slider/slider%20(3).jpg",
+      "/image/slider/slider%20(4).jpg"
+    ],
+    "folderPath": "slider",
+    "imagePath": "slider/slider (1).jpg | slider/slider (2).jpg | slider/slider (3).jpg | slider/slider (4).jpg",
+    "collectionLabel": "slider",
+    "subfolderLabel": null,
+    "photoCount": 4
+  },
+  {
+    "id": "gal-0014",
     "slug": "table",
     "name": "طاولات قهوة وجانبية ومكتب",
     "shortDescription": "طاولات بارتفاعات وسطوح مختلفة (خشب، رخام، زجاج) لمساحات المعيشة والممرات. (12 صورة).",
@@ -319,7 +380,7 @@
     "photoCount": 12
   },
   {
-    "id": "gal-0013",
+    "id": "gal-0015",
     "slug": "tv-libraries",
     "name": "وحدات تلفزيون ومكتبات عرض",
     "shortDescription": "دمج الشاشة مع أدراج ورفوف؛ حلول تخزين أنيقة لغرف المعيشة. (10 صورة).",
@@ -347,7 +408,7 @@
     "photoCount": 10
   },
   {
-    "id": "gal-0014",
+    "id": "gal-0016",
     "slug": "youth-rooms",
     "name": "غرف شباب وأطفال",
     "shortDescription": "مساحات نوم ودراسة بروح شبابية؛ ألوان وخزائن تناسب الاستخدام اليومي. (59 صورة).",
