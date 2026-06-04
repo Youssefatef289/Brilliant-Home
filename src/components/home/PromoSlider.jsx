@@ -28,9 +28,9 @@ export default function PromoSlider() {
 
   return (
     <section className="relative w-full overflow-hidden " aria-label="عروض وأقسام مميزة">
-      <div className="relative aspect-[1024/256]">
+      <div className="relative aspect-[1024/256] ">
         <AnimatePresence mode="wait" initial={false}>
-          <motion.img
+          <motion.img  
             key={slide.src}
             src={slide.src}
             alt={slide.alt}
@@ -38,14 +38,14 @@ export default function PromoSlider() {
             animate={{ opacity: 1, scale: 1 }}
             exit={reduceMotion ? { opacity: 1 } : { opacity: 0, scale: 1.0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full object-contain "
             loading="lazy"
             decoding="async"
           />
         </AnimatePresence>
       </div>
 
-      <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-2 md:bottom-5">
+      <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-2 md:bottom-5 ">
         {SLIDES.map((s, i) => {
           const active = i === index;
           return (
