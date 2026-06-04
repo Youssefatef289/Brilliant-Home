@@ -1,6 +1,6 @@
 /* صفحة تفاصيل المنتج */
 .page-product-detail {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', 'Cairo', sans-serif;
 }
 
 .page-product-detail,
@@ -20,5 +20,5 @@
     article,
     figcaption
   ) {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', 'Cairo', sans-serif;
 }

@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import LazyImage from '@/components/ui/LazyImage';
 import { formatProductBody, formatProductTitle } from '@/utils/productDisplay';
 import { getProductDisplayHeadline, getProductMarketing } from '@/utils/productMarketing';
-import { Button } from '@/components/ui/Button';
 import { buildWhatsAppUrl, orderMessageForProduct } from '@/utils/whatsapp';
 
 function WhatsAppIcon({ className = 'h-4 w-4' }) {
@@ -19,6 +17,7 @@ export default function ProductCard({
   index = 0,
   coverSrc,
   imageIndex = 0,
+  onQuickView,
 }) {
   const marketing = getProductMarketing(product);
   const headline = getProductDisplayHeadline(product, formatProductTitle);
@@ -26,61 +25,74 @@ export default function ProductCard({
     ? marketing.cardText
     : formatProductBody(product.shortDescription);
   const mainSrc = coverSrc ?? product.images[0];
-  const detailTo =
-    imageIndex > 0
-      ? `/products/${product.slug}?img=${imageIndex}`
-      : `/products/${product.slug}`;
   const imageLabel =
     imageIndex > 0 ? `${headline} — صورة ${imageIndex + 1}` : headline;
+  const openModal = () => onQuickView?.(product, imageIndex);
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 22 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.04 }}
-      className="group flex flex-col overflow-hidden rounded-xl border border-luxury-border/60 bg-transparent transition hover:border-luxury-gold/40"
+      whileHover={{ y: -8 }}
+      transition={{ delay: index * 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-luxury-border/60 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.05)] transition duration-300 hover:border-luxury-gold/35 hover:shadow-[0_24px_55px_rgba(184,149,46,0.16)]"
     >
-      <Link
-        to={detailTo}
-        className="relative block aspect-[4/3] overflow-hidden rounded-xl bg-luxury-mist"
-      >
-        <LazyImage
-          src={mainSrc}
-          alt={imageLabel}
-          className="absolute inset-0 h-full w-full min-h-[200px]"
-          imgClassName="object-cover transition duration-700 group-hover:scale-[1.04]"
+      <div className="relative aspect-[4/3] overflow-hidden bg-luxury-mist">
+        <button
+          type="button"
+          onClick={openModal}
+          aria-label={`معاينة ${headline}`}
+          className="absolute inset-0 z-10 h-full w-full cursor-pointer"
+        >
+          <LazyImage
+            src={mainSrc}
+            alt={imageLabel}
+            className="absolute inset-0 h-full w-full"
+            imgClassName="object-cover transition duration-700 group-hover:scale-[1.06]"
+          />
+        </button>
+
+        {product.collectionLabel && (
+          <span className="pointer-events-none absolute start-3 top-3 z-20 rounded-full bg-white/92 px-3 py-1 text-[11px] font-bold text-luxury-gold-dark shadow-sm backdrop-blur-sm">
+            {product.collectionLabel}
+          </span>
+        )}
+
+        <div
+          className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-luxury-ink/70 via-luxury-ink/10 to-transparent opacity-0 transition duration-300 group-hover:opacity-100"
+          aria-hidden
         />
-      </Link>
 
-      <div className="flex flex-1 flex-col px-1 pt-4 md:pt-5">
-        <Link to={detailTo}>
-          <h2 className="font-display text-lg font-bold text-luxury-ink transition group-hover:text-luxury-gold-dark md:text-xl">
-            {headline}
-          </h2>
-        </Link>
-        <p className="mt-2 line-clamp-3 flex-1 text-sm font-medium leading-[1.75] text-luxury-ink-muted">
-          {blurb}
-        </p>
-
-        <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-          <Link
-            to={detailTo}
-            className="inline-flex flex-1 items-center justify-center rounded-sm border border-luxury-gold/50 px-4 py-2.5 text-center text-xs font-bold text-luxury-gold-dark transition hover:bg-luxury-gold/10"
+        <div className="absolute inset-x-0 bottom-0 z-30 flex translate-y-4 items-center gap-2.5 p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+          <button
+            type="button"
+            onClick={openModal}
+            className="inline-flex flex-1 items-center justify-center rounded-full bg-white/95 px-4 py-2.5 text-xs font-bold text-luxury-ink shadow-md backdrop-blur-sm transition hover:bg-white hover:text-luxury-gold-dark"
           >
-            التفاصيل
-          </Link>
-          <Button
-            as="a"
+            عرض التفاصيل
+          </button>
+          <a
             href={buildWhatsAppUrl(orderMessageForProduct(product))}
             target="_blank"
             rel="noopener noreferrer"
-            variant="whatsapp"
-            className="flex-1 !py-2.5 !text-xs"
+            onClick={(e) => e.stopPropagation()}
+            aria-label="اطلب عبر واتساب"
+            className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md transition hover:bg-[#1ebe57]"
           >
-            <WhatsAppIcon />
-            اطلب الآن
-          </Button>
+            <WhatsAppIcon className="h-5 w-5" />
+          </a>
         </div>
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <button type="button" onClick={openModal} className="text-start">
+          <h2 className="font-display text-lg font-extrabold leading-snug text-luxury-ink transition group-hover:text-luxury-gold-dark md:text-xl">
+            {headline}
+          </h2>
+        </button>
+        <p className="mt-2 line-clamp-2 text-sm font-medium leading-[1.8] text-luxury-ink-muted">
+          {blurb}
+        </p>
       </div>
     </motion.article>
   );

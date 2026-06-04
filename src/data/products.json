@@ -483,5 +483,34 @@
     "collectionLabel": "غرف شباب",
     "subfolderLabel": null,
     "photoCount": 59
+  },
+  {
+    "id": "gal-0017",
+    "slug": "bedrooms-bedroom--3",
+    "name": "غرفة نوم — تصميم مودرن",
+    "shortDescription": "غرفة نوم بتصميم عصري متكامل: سرير، خزائن، وتشطيبات خشبية متناسقة بلمسة دافئة. (11 صورة).",
+    "description": "غرفة نوم بتصميم عصري متكامل يجمع بين الراحة والأناقة: سرير وتنجيد أنيق، خزائن بمساحات تخزين عملية، وتشطيبات خشبية متناسقة بلمسة دافئة. مرّ على كل الصور لرؤية التفاصيل والخامات عن قرب. تتضمن هذه المجموعة 11 صورة. للمقاسات والسعر والخامات راسلنا على واتساب.",
+    "price": null,
+    "currency": "EGP",
+    "category": "bedrooms",
+    "featured": false,
+    "images": [
+      "/image/bedrooms/bedroom-%203/bedroom%20(1).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(2).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(3).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(4).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(5).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(6).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(7).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(8).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(9).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(10).jpeg",
+      "/image/bedrooms/bedroom-%203/bedroom%20(11).jpeg"
+    ],
+    "folderPath": "bedrooms/bedroom- 3",
+    "imagePath": "bedrooms/bedroom- 3/bedroom (1).jpeg | bedrooms/bedroom- 3/bedroom (2).jpeg | bedrooms/bedroom- 3/bedroom (3).jpeg | bedrooms/bedroom- 3/bedroom (4).jpeg | bedrooms/bedroom- 3/bedroom (5).jpeg | bedrooms/bedroom- 3/bedroom (6).jpeg | bedrooms/bedroom- 3/bedroom (7).jpeg | bedrooms/bedroom- 3/bedroom (8).jpeg | bedrooms/bedroom- 3/bedroom (9).jpeg | bedrooms/bedroom- 3/bedroom (10).jpeg | bedrooms/bedroom- 3/bedroom (11).jpeg",
+    "collectionLabel": "غرف نوم",
+    "subfolderLabel": "bedroom- 3",
+    "photoCount": 11
   }
 ]

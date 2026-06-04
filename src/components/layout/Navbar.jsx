@@ -116,21 +116,17 @@ export default function Navbar() {
             href={buildWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className={
-              overHero
-                ? 'text-white/85 transition hover:text-luxury-gold-light'
-                : 'text-luxury-ink-muted transition hover:text-luxury-gold-dark'
-            }
+            className="text-[#25D366] transition hover:text-[#1ebe57]"
           >
             <span className="sr-only">واتساب</span>
-            <WhatsAppIcon />
+            <WhatsAppIcon className="h-6 w-6" />
           </a>
           <Button
             as="a"
             href={buildWhatsAppUrl('مرحبًا Brilliant Home، أرغب في الاستفسار عن منتجاتكم.')}
             target="_blank"
             rel="noopener noreferrer"
-            variant="primary"
+            variant="whatsapp"
             className="!py-2.5 !px-5 !text-xs"
           >
             <WhatsAppIcon className="h-4 w-4" />

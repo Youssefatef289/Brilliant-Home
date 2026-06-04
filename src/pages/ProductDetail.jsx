@@ -101,9 +101,6 @@ export default function ProductDetail() {
                   {product.subfolderLabel ? ` · ${product.subfolderLabel}` : ''}
                 </span>
               )}
-              <span className="rounded-full bg-luxury-charcoal/90 px-3 py-1 text-[11px] font-bold text-white">
-                كود: {product.id}
-              </span>
               {product.photoCount != null && (
                 <span className="text-xs font-semibold text-luxury-ink-muted">
                   {product.photoCount} صورة في المعرض
@@ -191,7 +188,7 @@ export default function ProductDetail() {
                     </Button>
                     <Button
                       as="a"
-                      href={buildWhatsAppUrl(`استفسار عن: ${displayTitle} (${product.id})`)}
+                      href={buildWhatsAppUrl(`استفسار عن: ${displayTitle}`)}
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="outline"

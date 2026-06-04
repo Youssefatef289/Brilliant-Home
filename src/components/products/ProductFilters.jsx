@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { PRODUCT_CATEGORIES } from '@/data/site';
 
@@ -7,8 +8,31 @@ export default function ProductFilters({
   category,
   onCategoryChange,
 }) {
+  const scrollRef = useRef(null);
+  const tabRefs = useRef([]);
+  const prevIndexRef = useRef(-1);
+
+  const activeIndex = PRODUCT_CATEGORIES.findIndex((c) => c.id === category);
+
+  useEffect(() => {
+    if (activeIndex < 0) return;
+    const prev = prevIndexRef.current;
+    // كشف التاب المجاور في اتجاه الحركة ليتقلّب الشريط للأمام أو للخلف
+    let targetIndex = activeIndex;
+    if (prev !== -1 && activeIndex > prev) {
+      targetIndex = Math.min(activeIndex + 1, PRODUCT_CATEGORIES.length - 1);
+    } else if (prev !== -1 && activeIndex < prev) {
+      targetIndex = Math.max(activeIndex - 1, 0);
+    }
+    const el = tabRefs.current[targetIndex] ?? tabRefs.current[activeIndex];
+    if (el && typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+    }
+    prevIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
   return (
-    <div className="mb-10 space-y-6">
+    <div className="mb-10 space-y-5">
       <div className="relative max-w-xl">
         <label htmlFor="product-search" className="sr-only">
           بحث في المنتجات
@@ -23,29 +47,45 @@ export default function ProductFilters({
           type="search"
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          placeholder="ابحث بالاسم، الوصف، أو كود المنتج..."
-          className="w-full rounded-sm border border-luxury-border bg-white py-3.5 pl-4 pr-12 text-sm font-medium text-luxury-ink placeholder:text-luxury-ink-muted/70 focus:border-luxury-gold/60 focus:outline-none focus:ring-2 focus:ring-luxury-gold/20"
+          placeholder="ابحث بالاسم أو التصنيف..."
+          className="w-full rounded-2xl border border-luxury-border/80 bg-white/90 py-3.5 pl-4 pr-12 text-sm font-medium text-luxury-ink shadow-sm backdrop-blur-xl transition placeholder:text-luxury-ink-muted/70 focus:border-luxury-gold/60 focus:outline-none focus:ring-2 focus:ring-luxury-gold/20"
           autoComplete="off"
         />
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        {PRODUCT_CATEGORIES.map((c) => {
+      <div
+        ref={scrollRef}
+        className="flex gap-1.5 overflow-x-auto rounded-2xl border border-luxury-border/70 bg-white/70 p-1.5 backdrop-blur-sm [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        role="tablist"
+        aria-label="تصنيفات المنتجات"
+      >
+        {PRODUCT_CATEGORIES.map((c, idx) => {
           const active = category === c.id;
           return (
             <motion.button
               key={c.id}
+              ref={(el) => {
+                tabRefs.current[idx] = el;
+              }}
               type="button"
+              role="tab"
+              aria-selected={active}
               onClick={() => onCategoryChange(c.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`rounded-full border px-4 py-2 text-xs font-bold transition ${
+              whileTap={{ scale: 0.95 }}
+              className={`relative flex-shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-colors duration-300 ${
                 active
-                  ? 'border-luxury-gold-dark bg-luxury-gold/15 text-luxury-gold-dark'
-                  : 'border-luxury-border bg-white text-luxury-ink-secondary hover:border-luxury-gold/40 hover:text-luxury-ink'
+                  ? 'text-white'
+                  : 'text-luxury-ink-secondary hover:text-luxury-gold-dark'
               }`}
             >
-              {c.label}
+              {active && (
+                <motion.span
+                  layoutId="filter-pill"
+                  className="absolute inset-0 -z-0 rounded-full bg-luxury-gold-dark shadow-md shadow-luxury-gold/30"
+                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                />
+              )}
+              <span className="relative z-10">{c.label}</span>
             </motion.button>
           );
         })}

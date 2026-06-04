@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import WhatsAppFloat from '@/components/layout/WhatsAppFloat';
+import ScrollToTopButton from '@/components/layout/ScrollToTopButton';
 import './Layout.css';
 
 export default function Layout() {
@@ -17,6 +18,7 @@ export default function Layout() {
       </main>
       <Footer />
       <WhatsAppFloat />
+      <ScrollToTopButton />
     </div>
   );
 }

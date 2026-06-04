@@ -24,6 +24,7 @@ export const NAV_LINKS = [
   { label: 'الرئيسية', href: '/' },
   { label: 'من نحن', href: '/about' },
   { label: 'المنتجات', href: '/products' },
+  { label: 'تواصل معنا', href: '/contact' },
 ];
 
 /** يطابق مجلدات `public/image` — يُحدَّث مع `npm run generate:products` عند إضافة صور */

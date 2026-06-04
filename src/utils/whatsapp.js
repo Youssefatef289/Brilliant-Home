@@ -19,5 +19,5 @@ export function buildWhatsAppUrl(message) {
  */
 export function orderMessageForProduct(product) {
   const title = getProductDisplayHeadline(product, formatProductTitle);
-  return `مرحبًا Brilliant Home، أرغب في الاستفسار عن الطلب:\nالمنتج: ${title}\nالكود: ${product.id}\nالرابط: ${typeof window !== 'undefined' ? window.location.origin : ''}/products/${product.slug}`;
+  return `مرحبًا Brilliant Home، أرغب في الاستفسار عن الطلب:\nالمنتج: ${title}\nالرابط: ${typeof window !== 'undefined' ? window.location.origin : ''}/products/${product.slug}`;
 }

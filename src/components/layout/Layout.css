@@ -1,10 +1,10 @@
 /* هيكل الصفحات المشترك — Navbar + Main + Footer */
 .app-shell {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', 'Cairo', sans-serif;
 }
 
 .app-shell :where(nav, header, footer, main, a, button, span, p, li, h1, h2, h3, h4, h5, h6) {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Inter', 'Cairo', sans-serif;
 }
 
 /* شعار النافبار — محاذاة منتظمة في RTL */

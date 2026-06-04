@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { SITE, NAV_LINKS } from '@/data/site';
 import { buildWhatsAppUrl } from '@/utils/whatsapp';
 
@@ -9,7 +8,7 @@ function SocialIcon({ children, label, href }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-luxury-border bg-white text-luxury-ink-secondary transition hover:border-luxury-gold/50 hover:text-luxury-gold-dark"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition hover:border-luxury-gold-light/50 hover:bg-white/10 hover:text-luxury-gold-light"
       aria-label={label}
     >
       {children}
@@ -17,80 +16,62 @@ function SocialIcon({ children, label, href }) {
   );
 }
 
+function TruckIcon({ className = 'h-5 w-5' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 6h11v9H3zM14 9h4l3 3v3h-7" />
+      <circle cx="7" cy="18" r="1.6" />
+      <circle cx="17" cy="18" r="1.6" />
+    </svg>
+  );
+}
+
+function PhoneIcon({ className = 'h-5 w-5' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="6" y="2" width="12" height="20" rx="2.5" />
+      <path d="M11 18h2" />
+    </svg>
+  );
+}
+
+/** شارة طريقة دفع — إمّا صورة شعار أو أيقونة + نص */
+const PAYMENTS = [
+  { label: 'الدفع عند الاستلام', icon: TruckIcon },
+  { label: 'فون كاش', icon: PhoneIcon },
+  { label: 'Mastercard', img: '/image/mastercard-v3.svg' },
+  { label: 'إنستا باي', img: '/image/instapay.png', boxed: true },
+  { label: 'Visa', img: '/image/visa-v3.svg' },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-luxury-border bg-luxury-surface">
-      <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 lg:px-10">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+    <footer className="relative overflow-hidden border-t border-white/10 bg-gradient-to-br from-luxury-charcoal via-luxury-graphite to-luxury-charcoal text-white">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-40"
+        aria-hidden
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 12% 0%, rgba(212,184,92,0.18) 0%, transparent 42%), radial-gradient(circle at 90% 100%, rgba(212,184,92,0.12) 0%, transparent 40%)',
+        }}
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-14 md:px-8 lg:px-10">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div>
             <img
-              src="./image/logo black.png"
+              src="/image/logo_white.png"
               alt={`${SITE.nameEn} logo`}
-              className="h-20 w-52 object-cover"
+              className="h-16 w-auto object-contain"
               loading="lazy"
               decoding="async"
             />
-            <p className="mt-4 text-sm font-medium leading-relaxed text-luxury-ink-muted">
+            <p className="mt-4 max-w-xs text-sm font-medium leading-relaxed text-white/65">
               {SITE.tagline}
             </p>
-          </motion.div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-luxury-ink">
-              روابط سريعة
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {NAV_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link
-                    to={l.href}
-                    className="text-sm font-medium text-luxury-ink-muted transition hover:text-luxury-gold-dark"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-luxury-ink">
-              تواصل معنا
-            </h3>
-            <ul className="mt-4 space-y-3 text-sm font-medium text-luxury-ink-muted">
-              <li className="leading-relaxed">{SITE.address}</li>
-              <li>
-                <a
-                  href={buildWhatsAppUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition hover:text-luxury-gold-dark"
-                >
-                  واتساب: {SITE.phoneDisplay}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="transition hover:text-luxury-gold-dark"
-                >
-                  {SITE.email}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-luxury-ink">
-              تابعنا
-            </h3>
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="mt-5 flex gap-2.5">
               <SocialIcon label="Facebook" href={SITE.social.facebook}>
                 <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -107,14 +88,87 @@ export default function Footer() {
                 </svg>
               </SocialIcon>
             </div>
-            <p className="mt-6 text-xs font-medium leading-relaxed text-luxury-ink-muted/90">
-              جودة التصنيع والمواعيد قد تختلف حسب التوفر. للأسعار النهائية تواصل
-              معنا.
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold text-white">روابط سريعة</h3>
+            <ul className="mt-4 space-y-2.5">
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    to={l.href}
+                    className="text-sm font-medium text-white/65 transition hover:text-luxury-gold-light"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold text-white">تواصل معنا</h3>
+            <ul className="mt-4 space-y-2.5 text-sm font-medium text-white/65">
+              <li className="leading-relaxed">{SITE.address}</li>
+              <li>
+                <a
+                  href={buildWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition hover:text-luxury-gold-light"
+                >
+                  واتساب: {SITE.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${SITE.email}`} className="transition hover:text-luxury-gold-light">
+                  {SITE.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold text-white">طرق الدفع</h3>
+            <ul className="mt-4 flex flex-wrap items-center gap-3">
+              {PAYMENTS.map(({ label, icon: Icon, img, boxed }) => (
+                <li key={label} title={label}>
+                  {img ? (
+                    boxed ? (
+                      <span className="inline-flex h-9 items-center justify-center rounded-lg bg-white px-2 shadow-sm">
+                        <img
+                          src={img}
+                          alt={label}
+                          className="h-7 w-auto object-contain"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </span>
+                    ) : (
+                      <img
+                        src={img}
+                        alt={label}
+                        className="h-9 w-auto object-contain"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )
+                  ) : (
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold text-white/75">
+                      <Icon className="h-5 w-5 text-luxury-gold-light" />
+                      {label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs font-medium leading-relaxed text-white/55">
+              ادفع بالطريقة الأنسب لك. للأسعار النهائية تواصل معنا.
             </p>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-luxury-border pt-8 text-center text-xs font-medium text-luxury-ink-muted md:flex-row md:text-right">
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs font-medium text-white/55 md:flex-row md:text-right">
           <p>
             © {year} {SITE.nameEn}. جميع الحقوق محفوظة.
           </p>

@@ -24,8 +24,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Cairo', 'sans-serif'],
-        display: ['Cairo', 'sans-serif'],
+        sans: ['Inter', 'Cairo', 'sans-serif'],
+        display: ['Inter', 'Cairo', 'sans-serif'],
       },
       backgroundImage: {
         'hero-gradient':

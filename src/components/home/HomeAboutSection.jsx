@@ -61,8 +61,8 @@ export default function HomeAboutSection() {
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
-          {/* عمود النص — يظهر أولًا في RTL (جهة اليمين) */}
-          <div className="order-2 text-start lg:order-1">
+          {/* عمود النص */}
+          <div className="order-2 text-start lg:order-2">
             <h2
               id="home-about-heading"
               className="font-display text-4xl font-extrabold tracking-tight text-luxury-charcoal md:text-5xl"
@@ -101,8 +101,8 @@ export default function HomeAboutSection() {
             </ul>
           </div>
 
-          {/* عمود الصور — في RTL يظهر يسار الصفحة */}
-          <div className="order-1 lg:order-2">
+          {/* عمود الصور */}
+          <div className="order-1 lg:order-1">
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
